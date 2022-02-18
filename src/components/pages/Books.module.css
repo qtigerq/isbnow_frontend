@@ -1,0 +1,9 @@
+.books_container {
+    padding: 2em;
+}
+
+.title_container {
+    display: flex;                      /*Um item do lado do outro*/
+    justify-content: space-between;     /*Espaçamento igual entre os itens*/
+    margin-bottom: 2em;                 /*Espaça a div dos demais conteúdos*/
+}

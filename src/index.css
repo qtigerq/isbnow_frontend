@@ -1,0 +1,11 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;           /*Pros inputs não ultrapassarem a area maxima das divs em que estiverem*/
+}
+
+html, body, #root {
+  background-color: #555555;
+  color: #EEEEEE;
+  height: 100%;
+}

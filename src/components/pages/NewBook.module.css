@@ -1,0 +1,9 @@
+.newbook_container {
+    text-align: center;
+    align-items: center;
+    margin-top: 2em;
+    padding: 1em;
+    border: 1px solid #FFFFFF;
+    border-radius: 10px;
+    height: min-content;
+}

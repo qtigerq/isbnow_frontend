@@ -1,0 +1,25 @@
+.navbar {
+    padding: 1em;                                           /*Espaça o conteúdo central de todas as bordas*/
+    background-image: linear-gradient(to bottom right, rgb(126, 123, 123), rgb(194, 192, 192));
+    
+}
+
+.list {
+    display: flex;                                          /*Coloca os itens da lista lado a lado*/
+    list-style: none;
+    align-items: center;                                    /*Alinhar na vertical*/
+}
+
+.item {
+    margin-right: 1em;                                      /*Afastar os itens entre si*/
+    font-weight: bold;
+}
+
+.item a{
+    color: #FFF;
+    text-decoration: none;                                  /*Tirar o sublinhado*/
+}
+
+.item a:hover{
+    color: #FFBB33;
+}

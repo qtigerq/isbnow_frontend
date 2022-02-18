@@ -1,0 +1,16 @@
+.button {
+    margin-top: 1em;
+    background-image: linear-gradient(to bottom right, #222, #777);
+    color: #FFF;
+    padding: 0.7em 2em;
+    text-decoration: none;
+    transition: 0.5s;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.button:hover {
+    color: #FFBB33;
+}
