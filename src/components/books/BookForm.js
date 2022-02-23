@@ -1,14 +1,28 @@
 import { useState } from 'react'
 
-import {BsEye} from 'react-icons/bs'
+import { BsEye } from 'react-icons/bs'
 
 import Input from '../form/Input'
 import SubmitButton from '../form/SubmitButton'
 import styles from './BookForm.module.css'
 
-const BookForm = ({handleSubmit, buttonText, bookData}) => {
-    
+const BookForm = ({ handleSubmit, buttonText, bookData }) => {
+
     const [book, setBook] = useState(bookData || {})                    //Se o formulario for chamado da tela de edicao, ele vai vir com os dados de ProjectData, senao, vem vazio
+
+    const invalidChars = ['-', '+', 'e', '.', ','];                 //Lista dos caracteres inválidos que ainda passam pelo filtro type='number' do html para campos numéricos
+
+    const removeInvalidChars = (string, invalidChars) => {
+        let newString = string + '';                            //converte para string
+
+        string.foreach(function (char) {
+            if (invalidChars.indexOf(char) === -1) {
+                newString = (newString + char);
+            }
+            //(invalidChars.indexOf(char) === -1) && newString = (newString + char);
+        })
+        return newString;
+    }
 
     const submit = (event) => {
         event.preventDefault()                                          //Nao deixa o formulario ser executado como Page Reload.
@@ -19,45 +33,50 @@ const BookForm = ({handleSubmit, buttonText, bookData}) => {
         setBook({ ...book, [event.target.name]: event.target.value })           // ...book=Pegar todos os dados do book até então (state); event.target.name (o nome do INPUT, independente do INPUT preenchido) vai receber event.target.value.
     }
 
+    const handleChangeNumber = (event) => {                                           //Funciona com qualquer formulário que tenha um input digitável
+        setBook({ ...book, [event.target.name]: parseInt(event.target.value) ? parseInt(event.target.value) : '' })           // ...book=Pegar todos os dados do book até então (state); event.target.name (o nome do INPUT, independente do INPUT preenchido) vai receber event.target.value.
+        console.log(book)
+    }
+
     const getBookByIsnb = (isbn) => {
-        
+
         fetch(`https://openlibrary.org/api/books?bibkeys=ISBN:${isbn}&jscmd=details&format=json`, {
             method: 'GET',
         })
-        .then(resp => resp.json())
-        .then(data => {
-            let isbn_book = {
-                isbn: isbn,
-                title: data[`ISBN:${isbn}`].details.title,
-                imprint: data[`ISBN:${isbn}`].details.publishers.toString(),
-                publi_year: data[`ISBN:${isbn}`].details.publish_date.slice(0,-3),
-            }
-            setBook(isbn_book);
-        })
-        .catch(err => console.log(err))
+            .then(resp => resp.json())
+            .then(data => {
+                let isbn_book = {
+                    isbn: isbn,
+                    title: data[`ISBN:${isbn}`].details.title,
+                    imprint: data[`ISBN:${isbn}`].details.publishers.toString(),
+                    publi_year: data[`ISBN:${isbn}`].details.publish_date.slice(0, -3),
+                }
+                setBook(isbn_book);
+            })
+            .catch(err => console.log(err))
 
     }
 
     const getBookByIsnbGoogle = (isbn) => {
-        
+
         fetch(`https://www.googleapis.com/books/v1/volumes?q=${isbn}+isbn&maxResults=1`, {
             method: 'GET',
         })
-        .then(resp => resp.json())
-        .then(data => {
-            let isbn_book = {
-                isbn: isbn,
-                title: data.items[0].volumeInfo.title,
-                authors: data.items[0].volumeInfo.authors.toString(),
-                imprint: data.items[0].volumeInfo.publisher,
-                publi_year: data.items[0].volumeInfo.publishedDate.slice(0,-6),
-                pages: data.items[0].volumeInfo.pageCount,
-                category: data.items[0].volumeInfo.categories.toString(),
-                lang: (data.items[0].volumeInfo.language),
-            }
-            setBook(isbn_book);
-        })
-        .catch(err => console.log(err))
+            .then(resp => resp.json())
+            .then(data => {
+                let isbn_book = {
+                    isbn: isbn,
+                    title: data.items[0].volumeInfo.title,
+                    authors: data.items[0].volumeInfo.authors.toString(),
+                    imprint: data.items[0].volumeInfo.publisher,
+                    publi_year: data.items[0].volumeInfo.publishedDate.slice(0, -6),
+                    pages: data.items[0].volumeInfo.pageCount,
+                    category: data.items[0].volumeInfo.categories.toString(),
+                    lang: (data.items[0].volumeInfo.language),
+                }
+                setBook(isbn_book);
+            })
+            .catch(err => console.log(err))
 
     }
 
@@ -69,17 +88,17 @@ const BookForm = ({handleSubmit, buttonText, bookData}) => {
                     text='ISBN'
                     name='isbn'
                     placeholder=''
-                    handleOnChange={handleChange}
-                    value={book.isbn? book.isbn : ''}
+                    handleOnChange={handleChangeNumber}
+                    value={book.isbn ? book.isbn : ''}
                 />
-                
+
                 <Input
                     type='text'
                     text='Título'
                     name='title'
                     placeholder=''
-                    handleOnChange={handleChange} 
-                    value={book.title? book.title : ''}
+                    handleOnChange={handleChange}
+                    value={book.title ? book.title : ''}
                 />
                 <Input
                     type='text'
@@ -87,7 +106,7 @@ const BookForm = ({handleSubmit, buttonText, bookData}) => {
                     name='authors'
                     placeholder=''
                     handleOnChange={handleChange}
-                    value={book.authors? book.authors : ''}
+                    value={book.authors ? book.authors : ''}
                 />
                 <Input
                     type='text'
@@ -95,7 +114,7 @@ const BookForm = ({handleSubmit, buttonText, bookData}) => {
                     name='category'
                     placeholder=''
                     handleOnChange={handleChange}
-                    value={book.category? book.category : ''}
+                    value={book.category ? book.category : ''}
                 />
                 <Input
                     type='text'
@@ -103,7 +122,7 @@ const BookForm = ({handleSubmit, buttonText, bookData}) => {
                     name='imprint'
                     placeholder=''
                     handleOnChange={handleChange}
-                    value={book.imprint? book.imprint : ''}
+                    value={book.imprint ? book.imprint : ''}
                 />
                 <Input
                     type='text'
@@ -111,7 +130,7 @@ const BookForm = ({handleSubmit, buttonText, bookData}) => {
                     name='lang'
                     placeholder=''
                     handleOnChange={handleChange}
-                    value={book.lang? book.lang : ''}
+                    value={book.lang ? book.lang : ''}
                 />
                 <Input
                     type='number'
@@ -119,7 +138,7 @@ const BookForm = ({handleSubmit, buttonText, bookData}) => {
                     name='pages'
                     placeholder=''
                     handleOnChange={handleChange}
-                    value={book.pages? book.pages : ''}
+                    value={book.pages ? book.pages : ''}
                 />
                 <Input
                     type='number'
@@ -127,13 +146,13 @@ const BookForm = ({handleSubmit, buttonText, bookData}) => {
                     name='publi_year'
                     placeholder=''
                     handleOnChange={handleChange}
-                    value={book.publi_year? book.publi_year : ''}
+                    value={book.publi_year ? book.publi_year : ''}
                 />
-                <SubmitButton text={buttonText}/>
+                <SubmitButton text={buttonText} />
             </form>
-            {console.log(book)}
-            <button  className={styles.isbn_button} onClick={() => getBookByIsnb(book.isbn)}><BsEye /></button>
-            <button  className={styles.isbn_button} onClick={() => getBookByIsnbGoogle(book.isbn)}>G</button>
+            {console.log('BOOKDATA:', bookData)}
+            <button className={styles.isbn_button} onClick={() => getBookByIsnb(book.isbn)}><BsEye /></button>
+            <button className={styles.isbn_button} onClick={() => getBookByIsnbGoogle(book.isbn)}>G</button>
         </div>
     )
 }

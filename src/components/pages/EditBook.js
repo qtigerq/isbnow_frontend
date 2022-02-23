@@ -10,8 +10,17 @@ const EditBook = () => {
 
     const [book, setBook] = useState([])
     
-    useEffect(() => {
+    /*async function getBook(id){
+        const response = await fetch(`http://localhost:3001/books/${id}`, { method: 'GET'});
+        const book = await response.json();
+        return book
+    }
 
+    const book = getBook(id); */
+    
+
+    useEffect(()  => {
+        
         fetch(`http://localhost:3001/books/${id}`, {
             method: 'GET',
             headers: {
@@ -20,15 +29,15 @@ const EditBook = () => {
         })
         .then(resp => resp.json())
         .then(data => {
-            setBook(data);
+            setBook(data)
         })
         .catch(err => console.log(err))
-
+     
     }, [id])
 
-    const editBook = async (book) => {
+    const editBook = (book) => {
 
-        await fetch(`http://localhost:3001/books/${book.id}`, {
+        fetch(`http://localhost:3001/books/${book.id}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
@@ -37,8 +46,7 @@ const EditBook = () => {
         })
         .then(resp => resp.json())
         .then(data => {
-            setBook(data);
-
+            //setBook(data);
         })
         .catch(err => console.log(err))
 

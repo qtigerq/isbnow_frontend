@@ -1,9 +1,10 @@
 .button {
-    background-image: linear-gradient(to bottom right, #222, #777);
+    background-image: linear-gradient(0deg,#000000,#275477);
     color: #EEE;
     padding: 0.5em 1em;
     cursor: pointer;
-    border-radius: 5px;
+    border-top-left-radius: 15px;
+    border-bottom-right-radius: 15px;
     border: 1px solid #222;
     transition: 0.5s;
     text-decoration: none;
@@ -12,4 +13,8 @@
 
 .button:hover {
     color: #FFBB33;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 15px;
 }

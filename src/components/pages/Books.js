@@ -4,6 +4,7 @@ import LinkButton from '../layout/LinkButton'
 import styles from './Books.module.css'
 
 import BookLine from '../books/BookLine'
+import BookSearch from '../books/BookSearch'
 
 const Books = () => {
 
@@ -17,11 +18,11 @@ const Books = () => {
                 'Content-Type': 'application/json'
             }
         })
-        .then(resp => resp.json())
-        .then(data => {
-            setBooks(data);
-        })
-        .catch(err => console.log(err))
+            .then(resp => resp.json())
+            .then(data => {
+                setBooks(data);
+            })
+            .catch(err => console.log(err))
 
     }, [])
 
@@ -33,19 +34,38 @@ const Books = () => {
                 'Content-Type': 'application/json'
             }
         })
-        .then(() => {                                                           //Como não trabalha com dados, omitimos a variavel data
-            setBooks(books.filter((book) => book.id !== id))                    //Faz um filtro dos livros excluindo aquele com ID que esta sendo excluído. Assim, exclui-se o livro no front e ele já foi excluído no Banco de Dados, assim não precisa fazer uma nova requisição trazendo todos os livros cadastrados novamente
+            .then(() => {                                                           //Como não trabalha com dados, omitimos a variavel data
+                setBooks(books.filter((book) => book.id !== id))                    //Faz um filtro dos livros excluindo aquele com ID que esta sendo excluído. Assim, exclui-se o livro no front e ele já foi excluído no Banco de Dados, assim não precisa fazer uma nova requisição trazendo todos os livros cadastrados novamente
+            })
+            .catch(err => console.log(err))
+
+    }
+
+    const findBook = (string) => {
+
+        fetch(`http://localhost:3001/books/${string}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
         })
-        .catch(err => console.log(err))
-        
+            .then(resp => resp.json())
+            .then(data => {
+                setBooks(data);
+            })
+            .catch(err => console.log(err))
+
     }
 
     return (
         <div className={styles.books_container}>
-            <div className={styles.title_container}>
+            <Container customClass='title_container'>
                 <h1>Livros</h1>
-                <LinkButton to='/newbook' text='Novo livro'/>
-            </div>
+                <LinkButton to='/newbook' text='Novo livro' />
+            </Container>
+            <Container customClass='search_container'>
+                <BookSearch handleSubmit={findBook} />
+            </Container>
             <Container >
                 {books.length > 0 &&
                     books.map((book) => (
@@ -54,7 +74,7 @@ const Books = () => {
                             id={book.id}
                             isbn={book.isbn}
                             title={book.title}
-                            authors={book.authors}                
+                            authors={book.authors}
                             category={book.category}
                             imprint={book.imprint}
                             lang={book.lang}

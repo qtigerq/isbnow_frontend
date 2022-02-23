@@ -1,13 +1,13 @@
 import {Link} from 'react-router-dom'
 import styles from './NavBar.module.css'
 import Container from './Container'
-import logo from "../../img/nav_icon.png"
+import {SiGitbook} from 'react-icons/si'
 
 const NavBar = () => {
     return (
         <nav className={styles.navbar}>
             <Container>
-                <Link to='/'> <img src={logo} alt='ISBNow' /></Link>
+                <Link className={styles.logo} to='/'><SiGitbook /> ISBNow</Link>
                 <ul className={styles.list}>
                     <li className={styles.item}><Link to='/'>Início</Link></li>
                     <li className={styles.item}><Link to='/books'>Livros</Link></li>

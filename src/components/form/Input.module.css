@@ -11,4 +11,16 @@
 
 .form_control input {
     padding: 0.3em;
+    padding-left: 0.5em;
+    border-top-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    
+}
+
+.form_control input:hover{
+    background-color: #EFEFEF;
+}
+
+.form_control input:focus{
+    background-color: #DEDEDE;
 }

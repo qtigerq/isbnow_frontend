@@ -22,3 +22,11 @@
     padding: 0.2em;
     list-style: none;
 }
+
+.title_container {
+    margin-bottom: 2em;                 /*Espaça a div dos demais conteúdos*/
+}
+.search_container {
+    margin-bottom: 2em;                 /*Espaça a div dos demais conteúdos*/
+}
+
