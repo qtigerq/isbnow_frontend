@@ -1,45 +1,27 @@
 import { useState } from 'react'
-
 import { BsEye } from 'react-icons/bs'
-
 import Input from '../form/Input'
 import SubmitButton from '../form/SubmitButton'
 import styles from './BookForm.module.css'
 
 const BookForm = ({ handleSubmit, buttonText, bookData }) => {
-
-    const [book, setBook] = useState(bookData || {})                    //Se o formulario for chamado da tela de edicao, ele vai vir com os dados de ProjectData, senao, vem vazio
-
-    const invalidChars = ['-', '+', 'e', '.', ','];                 //Lista dos caracteres inválidos que ainda passam pelo filtro type='number' do html para campos numéricos
-
-    const removeInvalidChars = (string, invalidChars) => {
-        let newString = string + '';                            //converte para string
-
-        string.foreach(function (char) {
-            if (invalidChars.indexOf(char) === -1) {
-                newString = (newString + char);
-            }
-            //(invalidChars.indexOf(char) === -1) && newString = (newString + char);
-        })
-        return newString;
-    }
+    const [book, setBook] = useState(bookData || {})
 
     const submit = (event) => {
-        event.preventDefault()                                          //Nao deixa o formulario ser executado como Page Reload.
-        handleSubmit(book)                                              //Executa o método que for passado pela PROP e passa o project que esta cadastrado no form como argumento
+        event.preventDefault()
+        handleSubmit(book)
     }
 
     const handleChange = (event) => {                                           //Funciona com qualquer formulário que tenha um input digitável
-        setBook({ ...book, [event.target.name]: event.target.value })           // ...book=Pegar todos os dados do book até então (state); event.target.name (o nome do INPUT, independente do INPUT preenchido) vai receber event.target.value.
+        setBook({ ...book, [event.target.name]: event.target.value })
     }
 
-    const handleChangeNumber = (event) => {                                           //Funciona com qualquer formulário que tenha um input digitável
-        setBook({ ...book, [event.target.name]: parseInt(event.target.value) ? parseInt(event.target.value) : '' })           // ...book=Pegar todos os dados do book até então (state); event.target.name (o nome do INPUT, independente do INPUT preenchido) vai receber event.target.value.
+    const handleChangeNumber = (event) => {
+        setBook({ ...book, [event.target.name]: parseInt(event.target.value) ? parseInt(event.target.value) : '' })
         console.log(book)
     }
 
     const getBookByIsnb = (isbn) => {
-
         fetch(`https://openlibrary.org/api/books?bibkeys=ISBN:${isbn}&jscmd=details&format=json`, {
             method: 'GET',
         })
@@ -54,11 +36,9 @@ const BookForm = ({ handleSubmit, buttonText, bookData }) => {
                 setBook(isbn_book);
             })
             .catch(err => console.log(err))
-
     }
 
     const getBookByIsnbGoogle = (isbn) => {
-
         fetch(`https://www.googleapis.com/books/v1/volumes?q=${isbn}+isbn&maxResults=1`, {
             method: 'GET',
         })
@@ -77,7 +57,6 @@ const BookForm = ({ handleSubmit, buttonText, bookData }) => {
                 setBook(isbn_book);
             })
             .catch(err => console.log(err))
-
     }
 
     return (
@@ -91,7 +70,6 @@ const BookForm = ({ handleSubmit, buttonText, bookData }) => {
                     handleOnChange={handleChangeNumber}
                     value={book.isbn ? book.isbn : ''}
                 />
-
                 <Input
                     type='text'
                     text='Título'

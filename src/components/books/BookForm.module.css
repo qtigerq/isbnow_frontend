@@ -1,6 +1,6 @@
 .form {
-    margin-top: 2em;                    /*Afasta o formulário do parágrafo explicativo*/
-    text-align: center;                 /*Centraliza os botões de ação*/
+    margin-top: 2em;
+    text-align: center;
     display: inline;
 }
 

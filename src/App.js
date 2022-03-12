@@ -17,8 +17,8 @@ function App() {
       <Router>
         <NavBar />
         <Container customClass='container_main'>
-          <Routes>                                                               {/*Antigo SWITCH mudou para ROUTES */}
-            <Route exact path="/" element={<Home />}> </Route>                   {/*exact serve para definir que o home só vai ser acessado quando o usuário entrar exatamente com o endereço "/" */}
+          <Routes>
+            <Route exact path="/" element={<Home />}> </Route>
             <Route path="/books" element={<Books />}> </Route>
             <Route path="/editbook/:id" element={<EditBook />}> </Route>
             <Route path="/newbook" element={<NewBook />}> </Route>

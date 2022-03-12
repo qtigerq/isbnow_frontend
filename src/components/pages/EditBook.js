@@ -3,25 +3,14 @@ import { useState, useEffect } from 'react'
 import BookForm from './../books/BookForm'
 import styles from './NewBook.module.css'
 import Container from '../layout/Container'
+import { Url } from '../../constants/Global'
 
 const EditBook = () => {
-    
     const {id} = useParams()
-
     const [book, setBook] = useState([])
     
-    /*async function getBook(id){
-        const response = await fetch(`http://localhost:3001/books/${id}`, { method: 'GET'});
-        const book = await response.json();
-        return book
-    }
-
-    const book = getBook(id); */
-    
-
     useEffect(()  => {
-        
-        fetch(`http://localhost:3001/books/${id}`, {
+        fetch(`${Url}/books/${id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -32,12 +21,10 @@ const EditBook = () => {
             setBook(data)
         })
         .catch(err => console.log(err))
-     
     }, [id])
 
     const editBook = (book) => {
-
-        fetch(`http://localhost:3001/books/${book.id}`, {
+        fetch(`${Url}/books/${book.id}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
@@ -49,7 +36,6 @@ const EditBook = () => {
             //setBook(data);
         })
         .catch(err => console.log(err))
-
     }
 
     return (

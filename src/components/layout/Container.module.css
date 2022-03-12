@@ -1,19 +1,19 @@
 .container {
-    width: 1200px;                              /*Largura limite para o conteúdo central*/
-    display: flex;                              /*Posicionar os elementos um ao lado do outro*/
-    justify-content: space-between;             /*Espaça os elementos igualmente de forma horizontal*/
-    margin: 0 auto;                             /*Centraliza o Container na tela*/
-    flex-wrap: wrap;                            /*Quando os elementos filhos de Container ultrapassarem o width de 1200px, eles criam uma nova linha abaixo*/
+    width: 1200px;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    flex-wrap: wrap;
 }
 
 /*CLASSES VARIÁVEIS*/
 .container_main {
-    min-height: 75vh;                           /*Para o conteúdo ocupar um grande espaço na tela. Obs: foi tentado com % em vez de vh mas não funcionou*/
+    min-height: 20vw;
     justify-content: center;
 }
 
 .start {
-    justify-content: flex-start;                /*Vai colocar os conteúdos para o início em vez de space-around*/
+    justify-content: flex-start;
     align-items: left;
     flex-direction: column;
 }
@@ -24,9 +24,9 @@
 }
 
 .title_container {
-    margin-bottom: 2em;                 /*Espaça a div dos demais conteúdos*/
+    margin-bottom: 2em;
 }
 .search_container {
-    margin-bottom: 2em;                 /*Espaça a div dos demais conteúdos*/
+    margin-bottom: 2em;
 }
 

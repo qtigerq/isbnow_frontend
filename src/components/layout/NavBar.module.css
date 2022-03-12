@@ -1,12 +1,12 @@
 .navbar {
-    padding: 1em;                                           /*Espaça o conteúdo central de todas as bordas*/
+    padding: 1em;
     background-image: linear-gradient(45deg,#000000,#6a9bd2);
 }
 
 .list {
-    display: flex;                                          /*Coloca os itens da lista lado a lado*/
+    display: flex;
     list-style: none;
-    align-items: center;                                    /*Alinhar na vertical*/
+    align-items: center;
 }
 
 .item {
@@ -18,7 +18,7 @@
 
 .item a{
     color: #FFF;
-    text-decoration: none;                                  /*Tirar o sublinhado*/
+    text-decoration: none;
     font-size: 1em;
     transition: 0.2s;
 }

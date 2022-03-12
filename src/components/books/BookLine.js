@@ -1,13 +1,10 @@
 import { Link } from 'react-router-dom'
-
 import styles from './BookLine.module.css'
-
 import {BsPencil, BsFillTrashFill} from 'react-icons/bs'
 
 const BookLine = ({id, isbn, title, authors, imprint, category, lang, pages, publi_year, handleRemove}) => {
-
     const remove = (event) => {
-        event.preventDefault()                            //Não deixa o botão dar reload na página
+        event.preventDefault()
         handleRemove(id)
     }
 

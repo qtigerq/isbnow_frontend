@@ -24,7 +24,7 @@
 
 .bookline_actions{
     display: flex;
-    align-items: center;                    /*Alinhar na vertical*/
+    align-items: center;
     justify-content: center;
 }
 

@@ -1,7 +1,5 @@
 import styles from './BookSearch.module.css'
-
 import { useState } from 'react'
-
 import SearchInput from '../form/SearchInput'
 import SubmitButton from '../form/SubmitButton'
 
@@ -10,12 +8,12 @@ const BookSearch = ({handleSubmit, searchData}) => {
     const [search, setSearch] = useState({})
 
     const submit = (event) => {
-        event.preventDefault()                                          //Nao deixa o formulario ser executado como Page Reload.
-        handleSubmit(search.string)                                              //Executa o método que for passado pela PROP e passa o project que esta cadastrado no form como argumento
+        event.preventDefault()
+        handleSubmit(search.string)
     }
     
-    const handleChange = (event) => {                                           //Funciona com qualquer formulário que tenha um input digitável
-        setSearch({ ...search, [event.target.name]: event.target.value })           // ...book=Pegar todos os dados do book até então (state); event.target.name (o nome do INPUT, independente do INPUT preenchido) vai receber event.target.value.
+    const handleChange = (event) => {
+        setSearch({ ...search, [event.target.name]: event.target.value })
     }
 
     return (
