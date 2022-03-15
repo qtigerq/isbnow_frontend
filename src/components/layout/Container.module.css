@@ -4,18 +4,17 @@
     justify-content: space-between;
     margin: 0 auto;
     flex-wrap: wrap;
+    
 }
 
 /*CLASSES VARIÁVEIS*/
 .container_main {
-    min-height: 20vw;
+    min-height: 80vh;
     justify-content: center;
 }
 
 .start {
     justify-content: flex-start;
-    align-items: left;
-    flex-direction: column;
 }
 
 .start ul li {
